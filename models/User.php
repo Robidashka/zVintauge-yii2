@@ -63,8 +63,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(Comment::className(), ['user_id' => 'id']);
     }
 
-
-
     public static function findIdentity($id)
     {
         return User::findOne($id);
