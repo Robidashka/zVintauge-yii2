@@ -4,6 +4,9 @@ namespace app\models;
 
 use Yii;
 
+const COMMENT_ALLOWED = 1;
+const COMMENT_DISALLOWED = 0;
+
 /**
  * This is the model class for table "comment".
  *
@@ -88,13 +91,13 @@ class Comment extends \yii\db\ActiveRecord
 
     public function allow()
     {
-        $this->status = 1;
+        $this->status = COMMENT_ALLOWED;
         return $this->save(false);
     }
 
     public function disallow()
     {
-        $this->status = 0;
+        $this->status = COMMENT_DISALLOWED;
         return $this->save(false);
     }
 }
