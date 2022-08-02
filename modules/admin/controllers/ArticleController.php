@@ -7,7 +7,7 @@ use app\models\ImageUpload;
 use app\models\Tag;
 use Yii;
 use app\models\Article;
-use app\models\ArticleSearch;
+use app\models\search\ArticleSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
