@@ -14,10 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="article-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Статьи</h1>
 
     <p>
-        <?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Создать статью', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'date',
             [
                 'format' => 'html',
-                'label' => 'Image',
+                'label' => 'Изображение',
                 'value' => function($data){
                     return Html::img($data->getImage(), ['width'=>200]);
                 }
