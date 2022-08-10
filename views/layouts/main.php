@@ -39,8 +39,8 @@ MainAsset::register($this);
 			<div id="cssmenu" class="align-center">
 				<ul>
 					<li><a href="/"><span>Home</span></a></li>
-					<li><a href="blog"><span>Blog</span></a></li>
-					<li><a href="about"><span>About</span></a></li>
+					<li><a href="<?= Url::toRoute(['/blog'])?>"><span>Blog</span></a></li>
+					<li><a href="<?= Url::toRoute(['/about'])?>"><span>About</span></a></li>
 					<?php if(Yii::$app->user->isGuest):?>
 	    	            <li><a href="<?= Url::toRoute(['/login'])?>">Login</a></li>
 	    	            <li class="last"><a href="<?= Url::toRoute(['/signup'])?>">Register</a></li>
