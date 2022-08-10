@@ -128,14 +128,12 @@ class SiteController extends Controller
     public function actionView($id)
     {
         $article = Article::findOne($id);
-        $tags = $article->tags;
         $comments = $article->getArticleComments();
         $commentForm = new CommentForm();
         $article->viewedCount();
 
         return $this->render('single', [
             'article'=>$article,
-            'tags' => $tags,
             'comments'=>$comments,
             'commentForm'=>$commentForm
         ]);

@@ -3,7 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\models\Category;
-use app\models\ImageUpload;
+use app\components\ImageUpload;
 use app\models\Tag;
 use Yii;
 use app\models\Article;
