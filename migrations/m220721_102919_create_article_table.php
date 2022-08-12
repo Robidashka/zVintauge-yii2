@@ -14,10 +14,12 @@ class m220721_102919_create_article_table extends Migration
     {
         $this->createTable('article', [
             'id' => $this->primaryKey(),
+            'slug' => $this->string(255),
             'title'=>$this->string(),
             'description'=>$this->text(),
             'content'=>$this->text(),
-            'date'=>$this->date(),
+            'created_at' => $this->dateTime()->notNull(),
+            'updated_at' => $this->dateTime()->notNull(),
             'image'=>$this->string(),
             'viewed'=>$this->integer(),
             'user_id'=>$this->integer(),

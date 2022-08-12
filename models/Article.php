@@ -4,8 +4,11 @@ namespace app\models;
 
 use Yii;
 use yii\data\Pagination;
-use yii\helpers\ArrayHelper;
 use app\components\ImageUpload;
+use yii\behaviors\SluggableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "article".
@@ -34,6 +37,26 @@ class Article extends \yii\db\ActiveRecord
         return 'article';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::class,
+                'attribute' => 'title',
+            ],
+
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -42,8 +65,6 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['title'], 'required'],
             [['title','description','content'], 'string'],
-            [['date'], 'date', 'format'=>'php:Y-m-d'],
-            [['date'], 'default', 'value' => date('Y-m-d')],
             [['title'], 'string', 'max' => 255],
             [['category_id'], 'number']
         ];
@@ -57,9 +78,11 @@ class Article extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
+            'slug' => 'Slug',
             'description' => 'Описание',
             'content' => 'Содержание',
-            'date' => 'Дата',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата изменения',
             'image' => 'Изображение',
             'viewed' => 'Просмотры',
             'user_id' => 'ID пользователя',
@@ -119,7 +142,7 @@ class Article extends \yii\db\ActiveRecord
     
     public function getDate()
     {
-        return Yii::$app->formatter->asDate($this->date);
+        return Yii::$app->formatter->asDate($this->created_at);
     }
     
     public static function getAll($pageSize = 5)
